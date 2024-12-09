@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanishq Soni - Resume</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.8;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #2a6496;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .contact-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .contact-info a {
+            color: #2a6496;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #2a6496;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        .list-item {
+            margin: 1.5rem 0;
+        }
+        .list-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #444;
+        }
+        .list-item p {
+            margin: 0.5rem 0 0;
+        }
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .education-table th, .education-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .education-table th {
+            background-color: #2a6496;
+            color: #fff;
+        }
+        .education-table td {
+            background-color: #f9f9f9;
+        }
+        a {
+            color: #2a6496;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .skills ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+        }
+        .skills li {
+            flex: 1 1 calc(33.333% - 1rem);
+            margin: 0.5rem;
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .skills li i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2a6496;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        footer a {
+            color: #2a6496;
+        }
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tanishq Soni</h1>
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> 302012 Jaipur, Rajasthan</p>
+            <p><i class="fas fa-phone"></i> +91 88242 12520</p>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:tanishqsoni81@gmail.com">tanishqsoni81@gmail.com</a></p>
+            <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/tanishq">LinkedIn</a></p>
+            <p><i class="fab fa-github"></i> <a href="https://github.com/tanishq20011430">GitHub</a></p>
+            <p><i class="fas fa-globe"></i> <a href="https://yourwebsite.com">Website</a></p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="list-item">
+                <h3>Dronapay Pvt. Ltd. - Business Analyst (Oct 2023 – Oct 2024)</h3>
+                <p>Analyzed business needs and translated them into technical requirements for application development. Utilized Postman for API testing, managed databases for data flow, and verified logs for troubleshooting. Leveraged Camunda for workflow automation and optimization.</p>
+            </div>
+            <div class="list-item">
+                <h3>KPMG Data Analytics Consulting Virtual Internship (June 2023 - Aug 2023)</h3>
+                <p>Developed data-driven insights by analyzing trends and creating visualizations to support strategic business decisions. Enhanced skills in data analytics and client-focused consulting.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Projects</h2>
+            <div class="list-item">
+                <h3>Real-time Stock Price Prediction</h3>
+                <p>Enhanced stock prediction app, increasing accuracy by 15%. Optimized trading decisions, resulting in a 10% profit increase and 20% user growth.</p>
+            </div>
+            <div class="list-item">
+                <h3>Credit Card Fraud Prediction</h3>
+                <p>Implemented cutting-edge fraud detection using Logistic Regression. Achieved 77% accuracy, effectively safeguarding transactions.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Skills</h2>
+            <ul class="skills">
+                <li><i class="fab fa-python"></i> Python</li>
+                <li><i class="fas fa-database"></i> SQL</li>
+                <li><i class="fas fa-chart-line"></i> Power BI</li>
+                <li><i class="fas fa-brain"></i> Machine Learning</li>
+                <li><i class="fas fa-cogs"></i> API Testing</li>
+            </ul>
+        </div>
+
+        <footer>
+            &copy; 2024 Tanishq Soni | Designed with ❤️
+        </footer>
+    </div>
+</body>
+</html>
