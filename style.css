@@ -1,442 +1,245 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    // Custom Cursor
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
 
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    cursor: none;
-    overflow-x: hidden;
-}
+    // Custom Cursor Transition Effect
+    cursor.style.transition = "transform 0.1s ease, left 0.1s ease, top 0.1s ease";
 
-/* Custom Cursor */
-.cursor {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #3b82f6;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease-out;
-}
+    // Dynamic Cursor Effect on Hovering Links and Buttons
+    const interactiveElements = document.querySelectorAll('.interactive');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('active');
+        });
+    });
 
-/* Navigation Styles */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 5%;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    animation: fadeIn 1s ease-out;
-}
+    // Navigation Smooth Scrolling
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active-section');
+            });
 
-.nav-links li {
-    margin: 0;
-}
+            // Show target section with a slide-in effect
+            targetSection.classList.add('active-section');
 
-.nav-links a {
-    text-decoration: none;
-    color: #3b82f6;
-    font-weight: bold;
-    font-size: 1.2rem;
-    transition: color 0.4s ease, transform 0.4s ease;
-}
+            // Smooth scroll to target section
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    });
 
-.nav-links a:hover {
-    color: #1d4ed8;
-    transform: scale(1.1);
-}
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
 
-/* Sections */
-section {
-    min-height: 100vh;
-    padding: 5rem 10%;
-    display: none;
-    background-color: #f4f4f4;
-    transition: opacity 0.7s ease-out;
-    opacity: 0;
-}
+    // Home Section Animations with Dynamic Timings
+    gsap.from('.name-title', {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: 'power3.out',
+        delay: 0.2
+    });
 
-.active-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    animation: slideIn 1s ease-out;
-}
+    gsap.from('.subtitle', {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        delay: 0.7,
+        ease: 'power3.out'
+    });
 
-/* Home Section */
-#home {
-    background: linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    animation: fadeIn 1.5s ease-out;
-}
+    gsap.from('.social-links a', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: 'back.out(1.7)',
+        delay: 1.0
+    });
 
-.home-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    animation: slideUp 1.4s ease-out;
-}
+    // Initialize Particles.js
+    particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#ff6b6b"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#ff6b6b"
+                },
+                "polygon": {
+                    "nb_sides": 5
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": false,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 40,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#ff6b6b",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 6,
+                "direction": "none",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        }
+    });
 
-.name-title {
-    font-size: 4rem;
-    color: #3b82f6;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out forwards;
-}
+    // Dynamic Scroll Animations
+    gsap.utils.toArray('.dynamic-scroll').forEach((el) => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse',
+                markers: false
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: 'power3.out'
+        });
+    });
+});
 
-.subtitle {
-    font-size: 1.6rem;
-    color: #666;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out 0.5s forwards;
-}
+// Form Submission (Improved with Dynamic Feedback and Visual Effects)
+document.querySelector('.contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
 
-/* Social Links Section */
-.social-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    padding: 0;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out 1s forwards;
-}
+    const form = e.target;
+    const name = form.querySelector('input[name="name"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const message = form.querySelector('textarea[name="message"]').value;
 
-.social-icon {
-    color: #3b82f6;
-    font-size: 3rem;
-    transition: transform 0.4s ease, color 0.4s ease;
-    display: inline-block;
-    text-align: center;
-    transform: scale(0);
-    animation: scaleIn 0.5s ease-out forwards;
-}
-
-.social-icon:hover {
-    transform: scale(1.3);
-    color: #1d4ed8;
-}
-
-/* Advanced Hover Effects on Social Icons */
-.social-icon {
-    position: relative;
-    animation: hoverEffect 2s ease-out infinite;
-}
-
-@keyframes hoverEffect {
-    0% {
-        transform: scale(1);
-        color: #3b82f6;
+    // Basic Form Validation
+    if (!name || !email || !message) {
+        showFeedback('error', 'Please fill in all the fields!');
+        return;
     }
-    50% {
-        transform: scale(1.2);
-        color: #1d4ed8;
-    }
-    100% {
-        transform: scale(1);
-        color: #3b82f6;
-    }
-}
 
-/* Section Titles */
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2.8rem;
-    color: #3b82f6;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
-    animation: fadeIn 1.5s ease-out;
-}
+    // Simulate form submission success
+    showFeedback('success', `Thank you, ${name}! Your message has been sent. I'll get back to you soon.`);
 
-/* About Section */
-#about {
-    background-color: #ffffff;
-    color: #333;
-    animation: fadeIn 1.5s ease-out;
-}
+    // Clear the form after submission
+    form.reset();
+});
 
-.about-content {
-    max-width: 900px;
-    text-align: center;
-    margin-top: 2rem;
-    opacity: 0;
-    animation: fadeInUp 1.4s ease-out 0.5s forwards;
-}
+// Function to show dynamic feedback on form submission
+function showFeedback(type, message) {
+    const feedbackElement = document.createElement('div');
+    feedbackElement.classList.add('form-feedback', type);
+    feedbackElement.textContent = message;
+    document.body.appendChild(feedbackElement);
 
-.about-text p {
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    line-height: 1.8;
-}
+    // Animate feedback element
+    gsap.from(feedbackElement, {
+        opacity: 0,
+        y: -20,
+        duration: 0.6,
+        ease: 'power2.out',
+    });
 
-/* Projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-    width: 100%;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out 0.5s forwards;
-}
-
-.project-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    text-align: center;
-    transform: scale(0);
-    animation: scaleIn 0.6s ease-out forwards;
-}
-
-.project-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    animation: hoverCard 0.4s ease-out;
-}
-
-@keyframes hoverCard {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-5px);
-    }
-}
-
-.project-icon {
-    font-size: 3rem;
-    color: #3b82f6;
-    margin-bottom: 1rem;
-}
-
-/* Advanced Hover Effects on Project Cards */
-.project-card {
-    position: relative;
-    overflow: hidden;
-}
-
-.project-card:hover .project-icon {
-    animation: bounceIcon 1.2s ease-out;
-}
-
-@keyframes bounceIcon {
-    0% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-10px);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-.project-tags {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.project-tags span {
-    background-color: #e6f2ff;
-    color: #3b82f6;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out 1s forwards;
-}
-
-/* Skills Section */
-.skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.skill-category {
-    text-align: center;
-    max-width: 250px;
-    opacity: 0;
-    animation: fadeInUp 1.5s ease-out 0.5s forwards;
-}
-
-.skill-category h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #3b82f6;
-    font-weight: 600;
-}
-
-.skill-category ul {
-    list-style: none;
-    padding: 0;
-}
-
-.skill-category li {
-    margin: 0.8rem 0;
-    background-color: #e6f2ff;
-    padding: 0.7rem;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-/* Contact Form */
-.contact-form {
-    max-width: 500px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1.5s ease-out 0.5s forwards;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.contact-form button {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.4s ease, transform 0.3s ease;
-}
-
-.contact-form button:hover {
-    background-color: #1d4ed8;
-    transform: translateY(-3px);
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 2rem;
-    background-color: #f4f4f4;
-    margin-top: 3rem;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeInUp 1.5s ease-out 1s forwards;
-}
-
-/* Smooth Scroll */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Keyframe Animations */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scaleIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes hoverEffect {
-    0% {
-        transform: scale(1);
-        color: #3b82f6;
-    }
-    50% {
-        transform: scale(1.2);
-        color: #1d4ed8;
-    }
-    100% {
-        transform: scale(1);
-        color: #3b82f6;
-    }
+    setTimeout(() => {
+        gsap.to(feedbackElement, {
+            opacity: 0,
+            y: 20,
+            duration: 0.4,
+            ease: 'power2.in',
+            onComplete: () => feedbackElement.remove()
+        });
+    }, 3000);
 }
